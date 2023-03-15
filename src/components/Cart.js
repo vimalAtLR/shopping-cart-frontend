@@ -64,7 +64,7 @@ function Cart() {
             <button className="btn btn-primary" onClick={() => handleClearCart()}>Clear Cart</button>
             <div className="cart-checkout">
               <div className="sub-total">
-                <span>Subtotal</span>
+                <span>Subtotal : </span>
                 <span className="amount">{cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping will calculate at checkout</p>
