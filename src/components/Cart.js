@@ -1,9 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import CartProduct from "./CartProduct";
+import { removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from '../store/reducers/cartReducer';
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+  const handleIncrease = (product) => {
+      dispatch(increaseQuantity(product));
+  }
+  const handleDecrease = (product) => {
+      dispatch(decreaseQuantity(product));
+  }
+  const handleRemoveItem = (product) => {
+      dispatch(removeFromCart(product));
+  }
+  const handleClearCart = () => {
+    dispatch(clearCart());
+}
+
   return (
     <div className="cart-container">
       <h2>Cart</h2>
@@ -39,30 +56,12 @@ function Cart() {
           <div className="cart-items">
             {cart.cartItems?.map((cartItem) => {
               return (
-                <div className="cart-item" key={cartItem.id}>
-                  <div className="cart-product">
-                    <img src={cartItem.image} alt={cartItem.name} />
-                    <div>
-                      <h3>{cartItem.name}</h3>
-                      <p>{cartItem.desc}</p>
-                      <button>Remove Item</button>
-                    </div>
-                  </div>
-                   <div className="cart-product-price">{cartItem.price}</div>
-                   <div className="cart-product-quantity">
-                    <button>-</button>
-                    <div className="count">{cartItem.cartQuantity}</div>
-                    <button>+</button>
-                   </div>
-                   <div className="cart-product-total-price">
-                    {cartItem.price * cartItem.cartQuantity}
-                   </div>
-                </div>
+                <CartProduct key={cartItem.id} cartItem={cartItem} handleIncrease={handleIncrease} handleDecrease={handleDecrease} handleRemoveItem={handleRemoveItem} />
               );
             })}
           </div>
           <div className="cart-summary">
-            <button className="btn btn-primary">Clear Cart</button>
+            <button className="btn btn-primary" onClick={() => handleClearCart()}>Clear Cart</button>
             <div className="cart-checkout">
               <div className="sub-total">
                 <span>Subtotal</span>

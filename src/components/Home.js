@@ -1,11 +1,18 @@
 import '.././App.css';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addToCart } from '../store/reducers/cartReducer';
+import { fetchProduct } from '../store/reducers/productReducer';
+import Product from './Product'
 
 function Home() {
   const { items } = useSelector(state => state.products);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProduct());
+    // eslint-disable-next-line
+  }, []);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -17,15 +24,7 @@ function Home() {
       <div className='products'>
         {items.map(product => {
           return (
-            <div key={product.id} className='product'>
-              <h3>{product.name}</h3>
-              <img src={product.image} alt={product.name} />
-              <div className="details">
-                <span>{product.desc}</span>
-                <span className="price">{product.price}</span>
-              </div>
-              <button type="button" className="btn btn-primary" onClick={() => handleAddToCart(product)}>Add to cart</button>
-            </div>
+            <Product key={product.id} product={product} handleAddToCart={handleAddToCart} />
           )
         })}
       </div>
