@@ -5,9 +5,9 @@ import { addToCart } from '../store/reducers/cartReducer';
 import { fetchProduct } from '../store/reducers/productReducer';
 import Product from './Product'
 
-function Home() {
+function Home(props) {
   const { items } = useSelector(state => state.products);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchProduct());

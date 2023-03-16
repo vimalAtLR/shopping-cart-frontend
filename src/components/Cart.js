@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartProduct from "./CartProduct";
 import { removeFromCart, increaseQuantity, decreaseQuantity, clearCart } from '../store/reducers/cartReducer';
 
-function Cart() {
+function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 

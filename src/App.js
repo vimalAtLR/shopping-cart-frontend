@@ -7,22 +7,25 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Home from './components/Home';
-import Navbar from './components/Navbar';
 import Cart from './components/Cart';
 import Notfound from './components/Notfound';
 import { ToastContainer } from 'react-toastify';
+import Register from './components/auth/Register';
+import Auth from './components/auth/Auth';
+import Login from './components/auth/Login';
 
 function App() {
   return (
     <>
       <BrowserRouter>
       <ToastContainer/>
-        <Navbar/>
         <Routes>
-          <Route exact path='/' element={<Home/>}/>
-          <Route exact path='/cart' element={<Cart/>}/>
-          <Route exact path='/not-found' element={<Notfound/>}/>
+          <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/' element={<Auth><Home/></Auth>}/>
+          <Route exact path='/cart' element={<Auth><Cart/></Auth>}/>
+          <Route exact path='/register' element={<Register/>}/>
           <Route path="*" element={<Navigate to="/not-found" replace />} />
+          <Route exact path='/not-found' element={<Notfound/>}/>
         </Routes>
       </BrowserRouter>
     </>

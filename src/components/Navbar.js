@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/reducers/authReducer";
 
 function Navbar() {
   const cartState = useSelector(state => state.cart);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(logout());
+    navigate("/login");
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,6 +47,10 @@ function Navbar() {
               {cartState.cartTotalQuantity}
             </span>
           </Link>
+
+          <div>
+            <button className="btn btn-primary" onClick={() => handleLogout()}>Logout</button>
+          </div>
         </div>
       </nav>
     </>
