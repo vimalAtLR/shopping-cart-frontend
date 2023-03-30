@@ -10,7 +10,7 @@ if (token) {
 
 // initial state
 const initialState = {
-    token: token,
+    token: token ? token : "",
     name: user ? user.name : "",
     email: user ? user.email : "",
     _id: user ? user._id : "",
@@ -26,13 +26,13 @@ export const registerUser = createAsyncThunk(
     "auth/registerUser",
     async (values, { rejectWithValue }) => {
         try{
-            let token = await axios.post('http://localhost:8000/api/register', {
+            let token = await axios.post(`https://84bd-103-90-96-62.in.ngrok.io/api/register`, {
                 name: values.name,
                 email: values.email,
                 password: values.password,
             });
 
-            localStorage.setItem('token', token.data);
+            localStorage.setItem('token', JSON.stringify(token.data));
             return token.data;
         } catch(err) {
             console.log("error in registerUser thunk method :: ", err)
@@ -46,12 +46,12 @@ export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async (values, { rejectWithValue }) => {
         try {
-            const token = await axios.post('http://localhost:8000/api/login', {
+            const token = await axios.post(`https://84bd-103-90-96-62.in.ngrok.io/api/login`, {
                 email: values.email,
                 password: values.password,
             });
 
-            localStorage.setItem('token', token.data);
+            localStorage.setItem('token', JSON.stringify(token.data));
             return token.data;
         } catch (err) {
             console.log("error in loginUser thunk method :: ", err)

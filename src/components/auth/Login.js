@@ -15,12 +15,16 @@ const Login = () => {
   });
 
   useEffect(() => {
-    if (auth._id) {
+    if (auth && auth._id) {
       navigate("/");
     } else {
       navigate('/login')
     }
   }, [auth, navigate]);
+
+  useEffect(() => {
+    localStorage.removeItem("token");
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -22,7 +22,7 @@ function Home(props) {
     <div className='home-container'>
       <h2>New Arrivals</h2>
       <div className='products'>
-        {items.map(product => {
+        {items && items.length && items.map(product => {
           return (
             <Product key={product.id} product={product} handleAddToCart={handleAddToCart} />
           )

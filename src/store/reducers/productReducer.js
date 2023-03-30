@@ -11,8 +11,12 @@ const initialState = {
 export const fetchProduct = createAsyncThunk(
     'fetchProducts',
     async () => {
-        const response = await axios.get("http://localhost:8000/products");
-        return response?.data;
+        const response = await axios.get(`https://84bd-103-90-96-62.in.ngrok.io/products`);
+        if (response && response.data && typeof response.data === "object") {
+          return response.data;
+        } else {
+          return [];
+        }
     }
 )
 

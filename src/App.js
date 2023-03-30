@@ -1,7 +1,7 @@
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css'
 import { 
-  BrowserRouter,
+  HashRouter,
   Routes,
   Route,
   Navigate,
@@ -17,7 +17,7 @@ import Login from './components/auth/Login';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
       <ToastContainer/>
         <Routes>
           <Route exact path='/login' element={<Login/>}/>
@@ -27,7 +27,7 @@ function App() {
           <Route path="*" element={<Navigate to="/not-found" replace />} />
           <Route exact path='/not-found' element={<Notfound/>}/>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
